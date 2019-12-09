@@ -9,4 +9,8 @@ configureMiddleware(server);
 server.use("/api", userRouter);
 server.use("/api", apiRouter);
 
+server.get("/", (req, res) => {
+  res.json({ api: "up" });
+});
+
 module.exports = server;
