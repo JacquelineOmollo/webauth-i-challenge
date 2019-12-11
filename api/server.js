@@ -6,7 +6,8 @@ const userRouter = require("../users/users-routers");
 const server = express();
 
 configureMiddleware(server);
-server.use("/api", userRouter);
+// server.use("/api/user", userRouter);
+server.use("/", userRouter);
 server.use("/api", apiRouter);
 
 server.get("/", (req, res) => {
