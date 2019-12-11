@@ -12,10 +12,10 @@ router.post("/register", (req, res) => {
 
   Users.add(user)
     .then(saved => {
+      req.session.username = saved.username;
       res.status(201).json(saved);
     })
     .catch(error => {
-      console.log("the error", error);
       res.status(500).json(error);
     });
 });
@@ -26,13 +26,14 @@ router.post("/register", (req, res) => {
 // });
 router.post("/login", (req, res) => {
   let { username, password } = req.body;
-  req.session.loggedIn = false;
+  // req.session.loggedIn = false;
 
   Users.findBy({ username })
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        req.session.loggedIn = true;
+        // req.session.loggedIn = true;
+        req.session.user = user;
         res
           .status(200)
           .json({ message: `Welcome ${user.username}! have a good time` });

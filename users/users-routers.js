@@ -5,7 +5,7 @@ const authRequired = require("../auth/auth-required-middleware");
 
 router.get("/", authRequired, (req, res) => {
   Users.find()
-    .then(user => {
+    .then(users => {
       res.json(users);
     })
     .catch(error => res.send(error));
